@@ -1,0 +1,205 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API for Crypto Battle",
+    "version": "1.0.0",
+    "title": "Crypto Battle API",
+    "contact": {
+      "email": "borysan@wizardsdev.com"
+    }
+  },
+  "host": "localhost:3001",
+  "paths": {
+    "/api/test1": {
+      "get": {
+        "tags": [
+          "Test"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "distance",
+            "in": "body",
+            "description": "Distance set for conversion. Accessible values: 'm', 'cm', 'in', 'ft', 'yd', 'km'",
+            "schema": {
+              "example": {
+                "distance": {
+                  "unit": "m",
+                  "value": 0.5
+                }
+              },
+            "required": true
+            }
+          },
+          {
+            "name": "convert_to",
+            "in": "body",
+            "description": "Distance set for conversion. Accessible values: 'm', 'cm', 'in', 'ft', 'yd', 'km'",
+            "schema": {
+              "example": {
+                "convert_to": "ft"
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JSON object containing the obtained distance value, rounded to\nhundredths, as well as the designation of the appropriate unit of measurement.",
+            "schema": {
+              "example": {
+                "unit": "ft",
+                "value": 1.64
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/test2": {
+      "get": {
+        "tags": [
+          "Test"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Sort Data",
+            "schema": {
+              "example": {
+                "distance": {
+                  "data": [{"user": "mike@mail.com", "rating": 20, "disabled": false},
+                  {"user": "greg@mail.com", "rating": 14, "disabled": false},
+                  {"user": "john@mail.com", "rating": 25, "disabled": true}]
+                }
+              },
+              "required": true
+            }
+          },
+          {
+            "name": "conditions",
+            "in": "body",
+            "description": "Sort rule",
+            "schema": {
+              "example": {
+                "condition": {
+                  "exclude": [{
+                    "disabled": true}],
+                  "sort_by": ["rating"]
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JSON object with data obtained after applying the processing condition (result):\n",
+            "schema": {
+              "example": {
+                "result": [
+                  {
+                    "user": "greg@mail.com",
+                    "rating": 14,
+                    "disabled": false
+                  },
+                  {
+                    "user": "mike@mail.com",
+                    "rating": 20,
+                    "disabled": false
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/test3": {
+      "get": {
+        "tags": [
+          "Test"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "set",
+            "in": "body",
+            "description": "Arbitrary set of natural numbers",
+            "schema": {
+              "example": {
+                "set": [4,5,6,7,8]
+              },
+              "required": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JSON object format containing two result sets (set_1 and set_2).",
+            "schema": {
+              "example": {
+                "set_1": [7,8],
+                "set_2": [4,5,6]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/test4": {
+      "get": {
+        "tags": [
+          "Test"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "corrections",
+            "in": "body",
+            "description": "Speed increment to be achieved",
+            "schema": {
+              "example": {
+                "corrections": [1,12,7,1]
+              },
+              "required": true
+            }
+          },
+          {
+            "name": "cells",
+            "in": "body",
+            "description": "list of available capsules",
+            "schema": {
+              "example": {
+                "set": [8,4,6,2,2]
+              },
+              "required": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JSON object containing the sequence of using capsules for the first\nengine (main engine); capsule use sequence for the second\nengine (sec_solution); and the total obtained during the rotation of the speed (delta_velocity).",
+            "schema": {
+              "example": {
+                "main_thruster": [0,8,6,0],
+                "sec_thruster": [2,4,2,0],
+                "delta_velocity": 18
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
